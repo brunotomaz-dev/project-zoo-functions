@@ -24,4 +24,19 @@ describe('Testes da função getOpeningHours', () => {
   it('Verifica se retorna erro The day must be valid. Example: Monday', () => {
     expect(() => { getOpeningHours('sonday', '09:00-AM'); }).toThrow('The day must be valid. Example: Monday');
   });
+  it('Verifica se retorna erro The hour should represent a number', () => {
+    expect(() => { getOpeningHours('Monday', 'Onze:00-AM'); }).toThrow('The hour should represent a number');
+  });
+  it('Verifica se retorna erro The minutes should represent a number', () => {
+    expect(() => { getOpeningHours('Monday', '11:horas-AM'); }).toThrow('The minutes should represent a number');
+  });
+  it('Verifica se retorna erro The abbreviation must be \'AM\' or \'PM\'', () => {
+    expect(() => { getOpeningHours('Monday', '11:00-FM'); }).toThrow('The abbreviation must be \'AM\' or \'PM\'');
+  });
+  it('Verifica se retorna erro The hour must be between 0 and 12', () => {
+    expect(() => { getOpeningHours('Monday', '13:00-PM'); }).toThrow('The hour must be between 0 and 12');
+  });
+  it('Verifica se retorna erro The minutes must be between 0 and 59', () => {
+    expect(() => { getOpeningHours('Monday', '12:60-PM'); }).toThrow('The minutes must be between 0 and 59');
+  });
 });
